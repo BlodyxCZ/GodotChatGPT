@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw4ybnrf15ig6"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_527tv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5l4y"]
+bg_color = Color(0, 0, 0, 0.196078)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_527tv")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Chat" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 576.0
+offset_top = 32.0
+offset_right = 1120.0
+offset_bottom = 616.0
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+scroll_following = true
+
+[node name="Panel" type="Panel" parent="Chat"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w5l4y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 568.0
+offset_right = 544.0
+offset_bottom = 616.0
+metadata/_edit_group_ = true
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Send" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "SEND"
+
+[node name="Clr" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "CLEAR"
+
+[node name="Img" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "IMG"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 80.0
+offset_right = 1072.0
+offset_bottom = 568.0
+expand_mode = 1
+stretch_mode = 4
+
+[node name="X" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 400.0
+offset_right = 448.0
+offset_bottom = 48.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 28
+text = "X"
+
+[node name="Lock" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 96.0
+focus_mode = 0
+text = "LOCK"
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="pressed" from="HBoxContainer/Send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="HBoxContainer/Clr" to="." method="_on_clr_pressed"]
+[connection signal="pressed" from="HBoxContainer/Img" to="." method="_on_img_pressed"]
+[connection signal="pressed" from="TextureRect/X" to="." method="_on_x_pressed"]
+[connection signal="pressed" from="Lock" to="." method="_on_lock_pressed"]
